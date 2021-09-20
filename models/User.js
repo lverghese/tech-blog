@@ -1,42 +1,51 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const bcryptjs = require('bcryptjs')
 
 // create our User model
 class User extends Model {}
 
 // define table columns and configuration
 User.init(
-    {
-      // define an id column
-      id: {
-        type: DataTypes.INTEGER,       
-        allowNull: false,    
-        primaryKey: true,    
-        autoIncrement: true
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [4]
+      }
+    }
+  },
+  {
+    hooks: {
+      // set up beforeCreate lifecycle "hook" functionality
+      async beforeCreate(newUserData) {
+        newUserData.password = await bcryptjs.hash(newUserData.password, 10);
+        return newUserData;
       },
-      // define a username column
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-      },
-      // define a password column
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          // this means the password must be at least four characters long
-          len: [4]
-        }
+      // set up beforeUpdate lifecycle "hook" functionality
+      async beforeUpdate(updatedUserData) {
+        updatedUserData.password = await bcryptjs.hash(updatedUserData.password, 10);
+        return updatedUserData;
       }
     },
-    {
-      sequelize,
-      timestamps: false,
-      freezeTableName: true,
-      underscored: true,
-      modelName: 'user'
-    }
-  );
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'user'
+  }
+);
+
 
 module.exports = User;
