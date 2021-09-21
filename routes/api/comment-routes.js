@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
         });
 });
 
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
     Comment.destroy({
         where: {
           id: req.params.id
@@ -43,5 +43,5 @@ router.delete('/:id', withAuth, (req, res) => {
           res.status(500).json(err);
         });
     });
-    
+
 module.exports = router;
