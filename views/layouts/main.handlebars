@@ -12,9 +12,12 @@
   <div class="wrapper">
     <header>
         <nav>
-            <button id="logout" class="btn-no-style">logout</button>
-            <a href="/login">LOGIN HERE</a>
-        </nav>
+  {{#if loggedIn}}
+  <button id="logout" class="btn-no-style">logout</button>
+  {{else}}
+  <a href="/login"><button class="btn-no-style">login</button></a>
+  {{/if}}
+</nav>
       <h1>
         <a href="/">Tech Blog</a>
       </h1>
@@ -27,7 +30,9 @@
     </footer>
   </div>
 
+{{#if loggedIn}}
 <script src="/javascript/logout.js"></script>
+{{/if}}
 </body>
 
 </html>
