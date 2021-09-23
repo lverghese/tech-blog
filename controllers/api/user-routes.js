@@ -52,7 +52,7 @@ router.get('/:id', (req, res) => {
   });
 
 // POST /api/users
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     // expects {username: 'thisismyname', password: 'password1234'}
     User.create({
       username: req.body.username,
@@ -66,6 +66,10 @@ router.post('/', withAuth, (req, res) => {
     
         res.json(dbUserData);
       })
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
     });
   });
 
@@ -74,7 +78,6 @@ router.post('/', withAuth, (req, res) => {
       User.findOne({
         where: {
           username: req.body.username,
-
         }
       }).then(dbUserData => {
         if (!dbUserData) {
