@@ -5,29 +5,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Blog</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
 </head>
 
 <body>
   <div class="wrapper">
     <header>
-        <nav>
+        <nav class="navbar navbar-dark bg-dark">
+  <a href="/"><button class="btn btn-dark">HOMEPAGE</button></a>
   {{#if loggedIn}}
-  <a href="/dashboard">YOUR DASHBOARD</a>
-  <button id="logout" class="btn-no-style">logout</button>
+  <a href="/dashboard"><button class="btn btn-dark">YOUR DASHBOARD</button></a>
+  <button id="logout" class="btn btn-dark">LOGOUT</button>
   {{else}}
-  <a href="/login"><button class="btn-no-style">login</button></a>
+  <a href="/login"><button class="btn btn-dark">LOGIN HERE</button></a>
   {{/if}}
 </nav>
-      <h1>
-        <a href="/">Tech Blog</a>
-      </h1>
-    </header>
+</header>
+<div class="container">
+  <h1 class="text-center">TECH BLOG</h1>
+</div>
+      
+    
     <main>
       {{{ body }}}
     </main>
-    <footer>
-      Thanks for visiting!
+    <footer class="bg-dark text-light py-2">
+      <h5 class="text-center">Thanks for visiting! </h5>
     </footer>
   </div>
 

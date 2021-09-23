@@ -1,14 +1,22 @@
+<link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+
 <article class="post">
       <div class="title">
-        <span>{{title}}</span>
+        <h2>{{title}}</h2>
       </div>
       <div>
-        <span>Content: {{post_url}}</span>
+        <h4>Content: </h4>
+        <span> {{post_url}}</span>
       </div>
-      <div class="meta">
-        Created by {{user.username}} on
+      <div class="meta py-2">
+        <h4>Created by:</h4> {{user.username}} on
         {{format_date created_at}}
         |
         <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
       </div>
     </article>
+
+    
